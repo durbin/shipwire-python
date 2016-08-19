@@ -82,7 +82,7 @@ METHODS = {
 
 class Shipwire():
     """ Shipwire API class."""
-    def __init__(self, username='neil@example.com', password='your-password',
+    def __init__(self, username, password,
                  host='api.shipwire.com', api_version=3, secure=True,
                  raise_on_errors=False, timeout=None, **kwargs):
         self.host = host

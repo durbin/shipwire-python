@@ -33,7 +33,9 @@ class ShipwireTestCase(TestCase):
 
         self.request.return_value = StubResponse(200, {})
 
-        self.client = api.Shipwire()
+        self.client = api.Shipwire(
+            username='neil@example.com',
+            password='a-dummy-password')
 
     def assert_url(self, client, url):
         base = '{}://{}/api/v{}'.format(
