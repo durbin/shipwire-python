@@ -114,6 +114,31 @@ class ShipwireTestCase(TestCase):
         self.client.order.split_orders(id=12345)
         self.assert_url_method(self.client, 'GET', '/orders/12345/splitOrders')
 
+    def test_call_generates_correct_purchase_order_url(self):
+        self.client.purchase_order.list()
+        self.assert_url_method(self.client, 'GET', '/purchaseOrders')
+
+        self.client.purchase_order.get(id=12345)
+        self.assert_url_method(self.client, 'GET', '/purchaseOrders/12345')
+
+        self.client.purchase_order.create()
+        self.assert_url_method(self.client, 'POST', '/purchaseOrders')
+
+        self.client.purchase_order.modify(id=12345)
+        self.assert_url_method(self.client, 'PUT', '/purchaseOrders/12345')
+
+        self.client.purchase_order.cancel(id=12345)
+        self.assert_url_method(self.client, 'POST', '/purchaseOrders/12345/cancel')
+
+        self.client.purchase_order.items(id=12345)
+        self.assert_url_method(self.client, 'GET', '/purchaseOrders/12345/items')
+
+        self.client.purchase_order.trackings(id=12345)
+        self.assert_url_method(self.client, 'GET', '/purchaseOrders/12345/trackings')
+
+        self.client.purchase_order.approve(id=12345)
+        self.assert_url_method(self.client, 'POST', '/purchaseOrders/12345/approve')
+
     def test_call_generates_correct_stock_urls(self):
         self.client.stock.products()
         self.assert_url_method(self.client, 'GET', '/stock')
@@ -300,6 +325,31 @@ class ShipwireTestCase(TestCase):
 
         self.assertIsInstance(self.client.order.split_orders(id=1234),
                               responses.ListResponse)
+
+    def test_call_returns_correct_purchase_order_response(self):
+        self.assertIsInstance(self.client.purchase_order.list(),
+                              responses.ListResponse)
+
+        self.assertIsInstance(self.client.purchase_order.get(id=1234),
+                              responses.ShipwireResponse)
+
+        self.assertIsInstance(self.client.purchase_order.create(),
+                              responses.ShipwireResponse)
+
+        self.assertIsInstance(self.client.purchase_order.modify(id=1234),
+                              responses.ShipwireResponse)
+
+        self.assertIsInstance(self.client.purchase_order.cancel(id=1234),
+                              responses.ShipwireResponse)
+
+        self.assertIsInstance(self.client.purchase_order.items(id=1234),
+                              responses.ListResponse)
+
+        self.assertIsInstance(self.client.purchase_order.trackings(id=1234),
+                              responses.ListResponse)
+
+        self.assertIsInstance(self.client.purchase_order.approve(id=1234),
+                              responses.ShipwireResponse)
 
     def test_call_returns_correct_stock_response(self):
         self.assertIsInstance(self.client.stock.products(),
