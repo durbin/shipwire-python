@@ -103,7 +103,7 @@ class Shipwire():
             when __ the copying causes recurssion. """
             raise AttributeError(name)
         elif self.resource:
-            if name in list(METHODS[self.resource].keys()):
+            if name in METHODS[self.resource]:
                 self.method = name
             else:
                 raise ShipwireError('The \'%s\' attribute is not currently defined.'
