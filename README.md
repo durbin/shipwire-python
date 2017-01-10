@@ -51,6 +51,14 @@ s.order.returns(id=41949255) # returns a list of returns for a given order.
 s.order.trackings(id=41949255) # returns a list of tracking information for a given order.
 s.order.split_orders(id=41949255) # returns a list of split orders for a given order.
 s.orders.list(updatedAfter="2014-10-19T21:09:26.030625") # returns a list of orders filtered by the parameters based to the method.
+s.purchase_order.list() # Get an itemized list of purchase orders.
+s.purchase_order.get(id=1234) # Get information about this purchase order.
+s.purchase_order.create(json=your_json) # Create a new purchase order.
+s.purchase_order.modify(id=1234, json=your_json) # Modify information about this purchase order.
+s.purchase_order.cancel(id=1234) # Cancel this purchase order.
+s.purchase_order.items(id=1234) # Get the contents of this purchase order.
+s.purchase_order.trackings(id=1234) # Get tracking information for this purchase order.
+s.purchase_order.approve(id=1234) # Approve this purchase order.
 s.stock.products() # returns a list of products that are listed in your shipwire account.
 s.rate.quote(json={}) # returns rate quotes based on the json information you supply. See a sample of the json below.
 s.order.create(json=your_json) # creates a new order in the shipwire system and returns a list of the orders created.
